@@ -7,7 +7,6 @@ const {
 const fs = require('node:fs');
 
 const clientId = '991389222323892374';
-const guildId = '994979277982408845';
 
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
@@ -30,7 +29,6 @@ module.exports = (client) => {
                 console.log('Started refreshing application (/) commands.');
 
                 await rest.put(
-                    //Routes.applicationGuildCommands(clientId), {
                     Routes.applicationCommands(clientId), {
                         body: client.commandArray
                     },
