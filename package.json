@@ -1,0 +1,19 @@
+{
+  "name": "luma-utilities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/index.js"
+  },
+  "author": "ziue",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.5.0",
+    "captcha-canvas": "^3.1.0",
+    "discord-rpc": "^4.0.1",
+    "discord.js": "^13.8.1",
+    "dotenv": "^16.0.1",
+    "mongoose": "^6.4.4"
+  }
+}
