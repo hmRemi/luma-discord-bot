@@ -23,13 +23,13 @@ module.exports = {
         .setDescription('Verify yourself')
         .addSubcommand(subcommand =>
             subcommand
-            .setName("panel")
-            .setDescription("Send the verification panel."))
+            .setName("setrole")
+            .setDescription("Send the verification panel.")
+            .addRoleOption(option => option.setName("role").setDescription('Set what role you should receive on verify.').setRequired(true)))
         .addSubcommand(subcommand =>
             subcommand
-            .setName("setrole")
-            .setDescription("Set the mentioned role for verifying.")
-            .addRoleOption(option => option.setName("role").setDescription("The role mentioned")))
+            .setName("panel")
+            .setDescription("Send the verification panel."))
         .addSubcommand(subcommand =>
             subcommand
             .setName("settings")
@@ -38,8 +38,9 @@ module.exports = {
     async execute(interaction) {
         if (interaction.options.getSubcommand() === "panel") {
             const Embed = new MessageEmbed()
-                .setTitle("Verification")
-                .setDescription("Click the button to verify!")
+                .setAuthor('Verification', 'https://media.discordapp.net/attachments/895632161057669180/964145767340204042/purchase_premium.png')
+                .setDescription(`To proceed further in this discord server, please verify yourself to ensure that you're a human`)
+                .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG')
                 .setColor(`#2f3136`);
 
             const buttons = new MessageActionRow()
@@ -50,24 +51,32 @@ module.exports = {
                     .setStyle("PRIMARY")
                 );
 
-            await interaction.channel.send({
-                embeds: [Embed],
-                components: [buttons]
-            });
-        } else if (interaction.options.getSubcommand() === "setrole") {
-            const role = interaction.options.getRole("role");
-
             let guildProfile = await Guild.findOne({
                 guildID: interaction.guild.id
             });
 
-            if (!guildProfile) {
-                guildProfile = await new Guild({
-                    _id: mongoose.Types.ObjectId(),
-                    guildID: interaction.guild.id
-                });
-                await guildProfile.save().catch(err => console.log(err));
+            if (!guildProfile.verificationRoleID) {
+                await interaction.reply(`Role hasn't been setup.`)
+                return;
             }
+
+            await interaction.channel.send({
+                embeds: [Embed],
+                components: [buttons]
+            });
+        } else if (interaction.options.getSubcommand() === "settings") {
+            let guildProfile = await Guild.findOne({
+                guildID: interaction.guild.id
+            });
+
+            if (guildProfile.verificationRoleID) {
+                await interaction.channel.send(`Role: ${guildProfile.verificationRoleID}`)
+            } else {
+                await interaction.channel.send(`Role hasn't been setup.`)
+
+            }
+        } else if (interaction.options.getSubcommand() === "setrole") {
+            const role = interaction.options.getRole("role");
 
             await Guild.findOneAndUpdate({
                 guildID: interaction.guild.id
@@ -84,26 +93,6 @@ module.exports = {
             await interaction.reply({
                 embeds: [Embed]
             });
-        } else if (interaction.options.getSubcommand() === "settings") {
-            let guildProfile = await Guild.findOne({
-                guildID: interaction.guild.id
-            });
-
-            if (!guildProfile) {
-                guildProfile = await new Guild({
-                    _id: mongoose.Types.ObjectId(),
-                    guildID: interaction.guild.id
-                });
-                await guildProfile.save().catch(err => console.log(err));
-            }
-
-            if (guildProfile.verificationRoleID) {
-                await interaction.channel.send(`Role: ${guildProfile.verificationRoleID}`)
-            } else {
-                await interaction.channel.send(`Role hasn't been setup.`)
-
-            }
-        } else if (interaction.options.getSubcommand() === "setguildid") {
         }
     }
 }

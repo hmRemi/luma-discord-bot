@@ -12,12 +12,12 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
             .setName("user")
-            .setDescription("Gets informatiom of a user mentioned")
+            .setDescription("Gets information of a user mentioned")
             .addUserOption(option => option.setName("target").setDescription("The user mentioned")))
         .addSubcommand(subcommand =>
             subcommand
             .setName("server")
-            .setDescription("Gets informatiom of the server")),
+            .setDescription("Gets information of the server")),
 
     async execute(interaction) {
         if (interaction.options.getSubcommand() === "user") {
@@ -47,14 +47,18 @@ module.exports = {
             }
         } else if (interaction.options.getSubcommand() === "server") {
 
-            const { createdTimestamp, ownerID, description } = interaction.guild;
+            const {
+                createdTimestamp,
+                ownerID,
+                description
+            } = interaction.guild;
+            
             const embed = new MessageEmbed()
                 //.setTitle(`Information about: ${interaction.guild.name}`)
                 //.addField(`Total Members`, `\`\`\`${interaction.guild.memberCount}\`\`\``)
                 .addFields({
                     name: "GENERAL",
-                    value:
-                    `
+                    value: `
                     Name: ${interaction.guild.name}
                     Created <t:${parseInt(createdTimestamp / 1000)}:R>
                     Total Members: ${interaction.guild.memberCount}

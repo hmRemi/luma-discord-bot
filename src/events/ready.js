@@ -1,11 +1,12 @@
+const Guild = require(`../database/models/guildSchema`)
+
 module.exports = {
     name: 'ready',
     once: true,
     execute(client) {
-        const users = client.guilds.cache.reduce((size, g) => size + g.memberCount, 0);
+        const users = client.guilds.cache.reduce((size, g) => size + g.memberCount + 500, 0);
         const guilds = client.guilds.cache.size;
-        const statusArray = [
-            {
+        const statusArray = [{
                 type: 'WATCHING',
                 content: 'progression being made.',
                 status: 'dnd'
@@ -22,26 +23,29 @@ module.exports = {
             }
         ];
 
+        client.guilds.cache.forEach(guild => {
+            console.log(`${guild.name} | ${guild.id}`);
+        })
 
-        async function pickPrecense() {
-            const option = Math.floor(Math.random() * statusArray.length);
+        
 
-            try {
-                await client.user.setPresence({
-                    activities: [
-                        {
-                            name: statusArray[option].content,
-                            type: statusArray[option].type
-                        },
-                    ],
-                    status: statusArray[option].status
-                });
-            } catch (error) {
-                console.error(error);
-            }
-        }
+async function pickPrecense() {
+    const option = Math.floor(Math.random() * statusArray.length);
 
-        setInterval(pickPrecense, 8 * 1000);
-        console.log(`Bot is online.`)
-    },
+    try {
+        await client.user.setPresence({
+            activities: [{
+                name: statusArray[option].content,
+                type: statusArray[option].type
+            }, ],
+            status: statusArray[option].status
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+setInterval(pickPrecense, 8 * 1000);
+console.log(`Bot is online.`)
+},
 };

@@ -10,6 +10,10 @@ const {
     Captcha
 } = require("captcha-canvas");
 
+const {
+    default: mongoose
+} = require("mongoose");
+
 const Guild = require(`../database/models/guildSchema`)
 
 module.exports = {
@@ -20,15 +24,30 @@ module.exports = {
 
             if (!command) return;
 
-            try {
+            let guildProfile = await Guild.findOne({
+                guildID: interaction.guild.id
+            });
 
-                if(command.permissions && command.permissions.length > 0) {
+            if (!guildProfile) {
+                guildProfile = await new Guild({
+                    _id: mongoose.Types.ObjectId(),
+                    guildID: interaction.guild.id,
+                    guildName: interaction.guild.name
+                });
+                await guildProfile.save().catch(err => console.log(err));
+            }
+
+            try {
+                if (command.permissions && command.permissions.length > 0) {
                     const Embed = new MessageEmbed()
-                        .setTitle("Insufficient permissions.")
+                        .setAuthor("Insufficient Permissions", "https://media.discordapp.net/attachments/981264899034476644/995440858923008020/image_10.png")
+                        .setDescription("You lack permissions to preform this command.")
+                        .setImage("https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG")
                         .setColor(`#2f3136`);
 
-                    if(!interaction.member.permissions.has(command.permissions)) return await interaction.reply({
-                        embeds: [Embed]
+                    if (!interaction.member.permissions.has(command.permissions)) return await interaction.reply({
+                        embeds: [Embed],
+                        ephemeral: true
                     });
                 }
 
@@ -49,9 +68,10 @@ module.exports = {
 
             const captchaAttachment = new MessageAttachment(await captcha.png, "captcha.png");
             const captchaEmbed = new MessageEmbed()
-                .setTitle('Luma Verification')
-                .setDescription('Please complete the captcha by clicking the correct button.')
+                .setAuthor('Verification', 'https://media.discordapp.net/attachments/895632161057669180/964145767340204042/purchase_premium.png')
+                .setDescription(`To verify yourself, click the correct code that it's displaying in green.`)
                 .setImage('attachment://captcha.png')
+                .setColor(`#2f3136`);
 
             const buttons = new MessageActionRow()
                 .addComponents(
@@ -88,24 +108,37 @@ module.exports = {
 
                 if (interaction.customId.includes("correctcaptcha")) {
                     const responseEmbed = new MessageEmbed()
-                        .setTitle("You've succeeded the captcha!")
-                        .setDescription(`You've been given the Verified Role!`)
+                        .setAuthor('Success', 'https://media.discordapp.net/attachments/994998007139414086/995443786018717747/image_6.png')
+                        .setDescription(`You've successfully verified yourself a human!`)
+                        .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG')
                         .setColor(`#2f3136`);
 
+                    try {
                         let guildProfile = await Guild.findOne({
                             guildID: interaction.guild.id
                         });
+
+                        if (!guildProfile) {
+                            guildProfile = await new Guild({
+                                _id: mongoose.Types.ObjectId(),
+                                guildID: interaction.guild.id,
+                                guildName: interaction.guild.name
+                            });
+                            await guildProfile.save().catch(err => console.log(err));
+                        }
 
                         var guild = client.guilds.cache.get(guildProfile.guildID)
                         const member = await guild.members.fetch(interaction.user.id)
                         const role = await guild.roles.fetch(guildProfile.verificationRoleID);
                         member.roles.add(role)
 
-                    const msg = await interaction.reply({
-                        embeds: [responseEmbed],
-                        ephemeral: true,
-                    });
-
+                        const msg = await interaction.reply({
+                            embeds: [responseEmbed],
+                            ephemeral: true,
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
 
                 if (interaction.customId.includes("send")) {
