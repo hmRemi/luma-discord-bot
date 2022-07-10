@@ -26,7 +26,7 @@ module.exports = {
             .setThumbnail('https://cdn.discordapp.com/emojis/995317374683197510.webp?size=96&quality=lossless')
             .setDescription("**Luma Utilities** is currently up and running! If you detect or experience some issues, please contact us immediately!")
             .setColor(`#2f3136`)
-            .setImage('https://cdn.discordapp.com/attachments/995312912820351037/995359473583530004/image_2.png')
+            .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG')
 
         const embedOffline = new MessageEmbed()
             .setAuthor({
@@ -37,7 +37,7 @@ module.exports = {
             .setThumbnail('https://cdn.discordapp.com/emojis/995317370958655528.webp?size=96&quality=lossless')
             .setDescription(`**Luma Utilities** is down and offline. We're aware of this issue and are actively investigating the source of the problem to fix, please standby.`)
             .setColor(`#2f3136`)
-            .setImage('https://cdn.discordapp.com/attachments/995312912820351037/995359473583530004/image_2.png')
+            .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG')
 
         const embedBadConnection = new MessageEmbed()
             .setAuthor({
@@ -48,7 +48,7 @@ module.exports = {
             .setThumbnail('https://cdn.discordapp.com/emojis/995317372166602782.webp?size=96&quality=lossless')
             .setDescription(`**Luma Utilities** is currently up and running, however; you will be experiencing major lag while using the bot. We're aware of this issue and are actively investigating the source of the problem to fix, please standby.`)
             .setColor(`#2f3136`)
-            .setImage('https://cdn.discordapp.com/attachments/995312912820351037/995359473583530004/image_2.png')
+            .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG')
 
         const embedTinyLag = new MessageEmbed()
             .setAuthor({
@@ -59,7 +59,7 @@ module.exports = {
             .setThumbnail('https://cdn.discordapp.com/emojis/995317373311655986.webp?size=96&quality=lossless')
             .setDescription(`**Luma Utilities** is currently up and running, however you may be experiencing some lag while using the bot.We're aware of this issue and are actively investigating the source of the problem to fix, please standby.`)
             .setColor(`#2f3136`)
-            .setImage('https://cdn.discordapp.com/attachments/995312912820351037/995359473583530004/image_2.png')
+            .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG')
 
         if (online && !offline && !badconnection && !tinylag) {
             interaction.channel.send({

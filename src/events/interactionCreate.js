@@ -15,6 +15,8 @@ const {
 } = require("mongoose");
 
 const Guild = require(`../database/models/guildSchema`)
+const TicketSetup = require(`../database/models/ticketSetupSchema`)
+
 
 module.exports = {
     name: 'interactionCreate',
@@ -35,6 +37,19 @@ module.exports = {
                     guildName: interaction.guild.name
                 });
                 await guildProfile.save().catch(err => console.log(err));
+            }
+
+            //
+            let ticketProfile = await TicketSetup.findOne({
+                guildID: interaction.guild.id
+            });
+
+            if (!ticketProfile) {
+                ticketProfile = await new TicketSetup({
+                    _id: mongoose.Types.ObjectId(),
+                    GuildID: interaction.guild.id,
+                });
+                await ticketProfile.save().catch(err => console.log(err));
             }
 
             try {

@@ -7,6 +7,7 @@ module.exports = (client) => {
             } else {
                 client.on(event.name, (...args) => event.execute(...args, client));
             }
+            
         }
     };
 }
