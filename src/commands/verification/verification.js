@@ -5,13 +5,14 @@ const {
     MessageAttachment,
     MessageEmbed,
     MessageActionRow,
-    MessageButton
+    MessageButton,
+    Permissions
 } = require("discord.js");
 const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
 
-const Guild = require(`../../database/models/guildSchema`)
+const Verify = require(`../../database/models/verifySchema`)
 
 const {
     default: mongoose
@@ -34,7 +35,7 @@ module.exports = {
             subcommand
             .setName("settings")
             .setDescription("List all verification settings")),
-
+    permissions: [Permissions.FLAGS.ADMINISTRATOR],
     async execute(interaction) {
         if (interaction.options.getSubcommand() === "panel") {
             const Embed = new MessageEmbed()
@@ -51,13 +52,12 @@ module.exports = {
                     .setStyle("PRIMARY")
                 );
 
-            let guildProfile = await Guild.findOne({
-                guildID: interaction.guild.id
+            let guildProfile = await Verify.findOne({
+                GuildID: interaction.guild.id
             });
 
             if (!guildProfile.verificationRoleID) {
-                await interaction.reply(`Role hasn't been setup.`)
-                return;
+                return await interaction.reply(`Role hasn't been setup.`);
             }
 
             await interaction.channel.send({
@@ -65,21 +65,20 @@ module.exports = {
                 components: [buttons]
             });
         } else if (interaction.options.getSubcommand() === "settings") {
-            let guildProfile = await Guild.findOne({
-                guildID: interaction.guild.id
+            let guildProfile = await Verify.findOne({
+                GuildID: interaction.guild.id
             });
 
-            if (guildProfile.verificationRoleID) {
-                await interaction.channel.send(`Role: ${guildProfile.verificationRoleID}`)
+            if (!guildProfile.verificationRoleID) {
+                return await interaction.channel.send(`Role hasn't been setup.`)
             } else {
-                await interaction.channel.send(`Role hasn't been setup.`)
-
+                return await interaction.channel.send(`Role: ${guildProfile.verificationRoleID}`)
             }
         } else if (interaction.options.getSubcommand() === "setrole") {
             const role = interaction.options.getRole("role");
 
-            await Guild.findOneAndUpdate({
-                guildID: interaction.guild.id
+            await Verify.findOneAndUpdate({
+                GuildID: interaction.guild.id
             }, {
                 verificationRoleID: role,
                 lastEdited: Date.now()

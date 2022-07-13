@@ -9,7 +9,8 @@ const {
 const {
     MessageEmbed,
     MessageActionRow,
-    MessageButton
+    MessageButton,
+    Permissions
 } = require("discord.js");
 
 const DB = require(`../../database/models/ticketSchema`)
@@ -145,7 +146,7 @@ module.exports = {
             .setDescription("Send ticket panel")
             ),
     
-
+    permissions: [Permissions.FLAGS.ADMINISTRATOR],
     async execute(interaction) {
         const {
             guild,
