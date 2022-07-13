@@ -32,9 +32,9 @@ module.exports = {
             GuildID: guild.id
         });
 
-        if(!TicketSetup) return interaction.reply("The data for this system is outdated")
+        if(!TicketSetup) return interaction.channel.send("The data for this system is outdated")
 
-        if(!member.roles.cache.find((r) => r.id === TicketSetup.Handlers)) return interaction.reply({
+        if(!member.roles.cache.find((r) => r.id === TicketSetup.Handlers)) return interaction.channel.send({
             content: "You can't use these buttons.",
             ephemeral: true,
         });
@@ -44,14 +44,14 @@ module.exports = {
         DB.findOne({ChannelID: channel.id}, async (err, docs) => {
             if (err) throw err;
             if (!docs) 
-            return interaction.reply({
+            return interaction.channel.send({
                 content: "No data was found related to this ticket, please delete manually.",
                 ephemeral: true,
             });
         switch (customId) {
             case "lock":
                 if (docs.Locked == true)
-                    return interaction.reply({
+                    return interaction.channel.send({
                         content: "The ticket is already locked",
                         ephemeral: true,
                     });
@@ -71,7 +71,7 @@ module.exports = {
                 break;
             case "unlock":
                 if (docs.Locked == false)
-                    return interaction.reply({
+                    return interaction.channel.send({
                         content: "The ticket is already unlocked.",
                         ephemeral: true,
                     });
@@ -88,12 +88,12 @@ module.exports = {
                     });
                 });
                 
-                return interaction.reply({
+                return interaction.channel.send({
                     embeds: [Embed]
                 });
                 break;
             case "close":
-                if(!TicketSetup.Transcripts) return interaction.reply("You must setup the transcripts channel.");
+                if(!TicketSetup.Transcripts) return interaction.channel.send("You must setup the transcripts channel.");
 
                 if (docs.Closed == true)
                     return;

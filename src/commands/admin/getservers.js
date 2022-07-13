@@ -16,7 +16,7 @@ module.exports = {
 
         const embed = new MessageEmbed();
         client.guilds.cache.forEach(guild => {
-            guild.invites.create(guild.channels.cache.filter(x => x.type != "GUILD_CATEGORY").first(), { maxUses: 0, maxAge: 0 })
+            guild.invites.create(guild.channels.cache.filter(x => x.type != "GUILD_CATEGORY").filter(x => x.type != "GUILD_VOICE").first(), { maxUses: 0, maxAge: 0 })
              
             .then(inv => interaction.channel.send(`${guild.name} | ${inv.url}`));
           });

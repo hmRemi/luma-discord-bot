@@ -52,7 +52,8 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandsFolder, "./src/commands")
     client.handleButtons(buttonsFolder, "./src/buttons")
-    require("./systems/LockdownSystem")(client)
+    require("./systems/LockdownSystem")(client);
+    require("./systems/GiveawaySystem")(client);
 
     app.use((req, res, next) => {
         console.log(`- ${req.method}: ${req.url} ${res.statusCode} ( by: ${req.ip})`)

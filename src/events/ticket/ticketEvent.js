@@ -27,8 +27,8 @@ module.exports = {
 
         const ID = Math.floor(Math.random() * 90000) + 10000;
 
-        if(!Data.Category) return interaction.reply("You must setup the category");
-        if(!Data.Everyone) return interaction.reply("You must setup the everyone role");
+        if(!Data.Category) return interaction.channel.send("You must setup the category");
+        if(!Data.Everyone) return interaction.channel.send("You must setup the everyone role");
 
 
         await guild.channels.create(`${customId + "-" + ID}`, {

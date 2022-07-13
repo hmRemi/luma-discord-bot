@@ -29,6 +29,16 @@ module.exports = {
         )
         .addSubcommand((subcommand) =>
             subcommand
+            .setName('skip')
+            .setDescription('Skip a song')
+        )
+        .addSubcommand((subcommand) =>
+            subcommand
+            .setName('stop')
+            .setDescription('Stop playing music')
+        )
+        .addSubcommand((subcommand) =>
+            subcommand
             .setName('search')
             .setDescription('Search a song')
             .addStringOption((option) =>
@@ -62,7 +72,7 @@ module.exports = {
         .addSubcommand((subcommand) =>
             subcommand
             .setName('filter')
-            .setDescription('Change music filter')
+            .setDescription('Chane music filter')
             .addStringOption((option) =>
                 option
                 .setName('filter')
@@ -122,20 +132,12 @@ module.exports = {
                         value: "queue"
                     }, 
                     {
-                        name: "skip",
-                        value: "skip"
-                    }, 
-                    {
                         name: "pause",
                         value: "pause"
                     }, 
                     {
                         name: "resume",
                         value: "resume"
-                    }, 
-                    {
-                        name: "stop",
-                        value: "stop"
                     }, 
                     {
                         name: "previous",
@@ -180,8 +182,17 @@ module.exports = {
         })
 
         try {
-
             switch (options.getSubcommand()) {
+                case "skip":
+                    await client.distube.skip(VoiceChannel);
+                    return interaction.reply({
+                        embeds: [messageEmbed.setDescription(`Song has been skipped.`)],
+                    });
+                case "stop":
+                    await client.distube.stop(VoiceChannel);
+                    return interaction.reply({
+                        embeds: [messageEmbed.setDescription(`Music has been stopped.`)],
+                    });
                 case "play": {
                     client.distube.play(VoiceChannel, options.getString("query"), {
                         textChannel: channel,
@@ -331,16 +342,7 @@ module.exports = {
                                 .setThumbnail(song.thumbnail)
                                 .setFooter({ text: `Requested by ${interaction.user.username}`, iconURL: interaction.user.avatarURL() })] 
                         })
-                        case "skip":
-                            await queue.skip(VoiceChannel);
-                            return interaction.reply({
-                                embeds: [messageEmbed.setDescription(`Song has been skipped.`)],
-                            });
-                        case "stop":
-                            await queue.stop(VoiceChannel);
-                            return interaction.reply({
-                                embeds: [messageEmbed.setDescription(`Music has been stopped.`)],
-                            });
+                        
                         case "pause":
                             await queue.pause(VoiceChannel);
                             return interaction.reply({
