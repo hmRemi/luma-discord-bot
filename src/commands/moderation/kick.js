@@ -31,6 +31,8 @@ module.exports = {
 
         let reason = interaction.options.getString('reason');
 
+        if (!kickMember.kickable) return interaction.reply("**Cannot Kick This User!**")
+
         const embedKicked = new MessageEmbed()
             .setAuthor({
                 name: `Kick Notification`,

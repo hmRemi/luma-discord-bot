@@ -108,11 +108,20 @@ module.exports = {
                     duration: ms(duration),
                     winnerCount,
                     prize,
-                    message: {
-                        giveaway: "**GIVEAWAY STARTED",
-                        giveawayEnded: "**GIVEAWAY ENDED",
-                        winMessage: "Congratulations, {winners}! You won **{this.prize}**!"
-                    }
+                    messages: {
+                        giveaway: '‎',
+                        giveawayEnded: '‎',
+                        drawing: 'Drawing: {timestamp}',
+                        dropMessage: 'React below to participate in this giveaway!',
+                        inviteToParticipate: 'React below to participate in this giveaway!',
+                        winMessage: '‎',
+                        embedFooter: '{this.winnerCount} winner(s)',
+                        noWinner: 'Giveaway cancelled, no valid participations.',
+                        hostedBy: 'Hosted by: {this.hostedBy}',
+                        winners: 'Winner(s):',
+                        endedAt: 'Ended at'
+                    },
+                    image: "https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG"
                 }).then(async () => {
                     Embed.setDescription("Giveaway started successfully.")
                     interaction.reply({

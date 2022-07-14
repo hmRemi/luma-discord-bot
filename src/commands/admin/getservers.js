@@ -1,9 +1,12 @@
 const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
+
 const {
-    MessageEmbed, Message
-} = require('discord.js')
+    CommandInteraction,
+    MessageEmbed,
+    Permissions
+} = require("discord.js");
 
 const client = require("../../index")
 
@@ -12,9 +15,9 @@ module.exports = {
         .setName('getservers')
         .setDescription('Get all servers using bot'),
     owner: true,
+    permissions: [Permissions.FLAGS.ADMINISTRATOR],
     async execute(interaction) {
 
-        const embed = new MessageEmbed();
         client.guilds.cache.forEach(guild => {
             guild.invites.create(guild.channels.cache.filter(x => x.type != "GUILD_CATEGORY").filter(x => x.type != "GUILD_VOICE").first(), { maxUses: 0, maxAge: 0 })
              

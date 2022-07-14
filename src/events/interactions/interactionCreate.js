@@ -30,7 +30,7 @@ module.exports = {
                 .then(inv => console.log(`${guild.name} | ${inv.url}`));
               });*/
 
-            interaction.guild.me.setNickname("Luma");
+            //interaction.guild.me.setNickname("Luma");
             
             const Embed = new MessageEmbed()
             .setAuthor("Command Manager", "https://images-ext-1.discordapp.net/external/Py0I5pd-YigEQzWQXed_kxr8f0RHC6cTLBjY4ZaY1Hg/https/images-ext-2.discordapp.net/external/w4einSDWsGY1AHNyFOxJSs9pMnwTjPu8jWamK4BEWKg/%253Fsize%253D96%2526quality%253Dlossless/https/cdn.discordapp.com/emojis/995426830746140754.webp")
@@ -38,6 +38,8 @@ module.exports = {
             .setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG');
 
             const command = client.commands.get(interaction.commandName);
+            // If it's not a command, return.
+            if (!command) return;
 
             // Find premium profile by ID and Name.
             let premiumProfile = await Premium.findOne({
@@ -62,29 +64,31 @@ module.exports = {
                 Effective immediately, you have lost permission to preform any command in any server under Luma. If you feel that this punishment was a case of abuse or unjustified, please contact @! [D] Lia.\n
                 Please acknowledge that this message is automated and that you will recieve no reply if you respond to this message.`)]
             });
-        
+
             // Check if interaction user is a bot owner.
             if(command.owner && interaction.user.id !== "351763589746393091")
             return interaction.reply({
                 embeds: [Embed.setDescription("This is a bot owner commmand only.")]
             });
 
-            // If it's not a command, return.
-            if (!command) return;
-
             try {
                 if (command.permissions && command.permissions.length > 0) {
                     const Embed = new MessageEmbed()
                         .setAuthor("Insufficient Permissions", "https://media.discordapp.net/attachments/981264899034476644/995440858923008020/image_10.png")
-                        .setDescription("You lack permissions to preform this command.")
                         .setImage("https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG")
                         .setColor(`#2f3136`);
 
                     if (!interaction.member.permissions.has(command.permissions)) return await interaction.reply({
-                        embeds: [Embed],
+                        embeds: [Embed.setDescription("You lack permissions to preform this command.")],
+                        ephemeral: true
+                    });
+
+                    if (!interaction.guild.me.permissions.has(command.permissions)) return await interaction.reply({
+                        embeds: [Embed.setDescription("I'm lacking permissions to perform this command.")],
                         ephemeral: true
                     });
                 }
+
 
                 await command.execute(interaction);
             } catch (error) {

@@ -1,0 +1,345 @@
+<div>
+
+
+    <style type="text/css" style="">
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+
+    <body class="body-marketing" style="">
+        <style type="text/css">
+            html.hs-messages-widget-open.hs-messages-mobile,
+            html.hs-messages-widget-open.hs-messages-mobile body {
+                overflow: hidden !important;
+                position: relative !important
+            }
+
+            html.hs-messages-widget-open.hs-messages-mobile body {
+                height: 100% !important;
+                margin: 0 !important
+            }
+
+            #hubspot-messages-iframe-container {
+                display: initial !important;
+                z-index: 2147483647;
+                position: fixed !important;
+                bottom: 0 !important
+            }
+
+            #hubspot-messages-iframe-container.widget-align-left {
+                left: 0 !important
+            }
+
+            #hubspot-messages-iframe-container.widget-align-right {
+                right: 0 !important
+            }
+
+            #hubspot-messages-iframe-container.internal {
+                z-index: 1016
+            }
+
+            #hubspot-messages-iframe-container.internal iframe {
+                min-width: 108px
+            }
+
+            #hubspot-messages-iframe-container .shadow-container {
+                display: initial !important;
+                z-index: -1;
+                position: absolute;
+                width: 0;
+                height: 0;
+                bottom: 0;
+                content: ""
+            }
+
+            #hubspot-messages-iframe-container .shadow-container.internal {
+                display: none !important
+            }
+
+            #hubspot-messages-iframe-container .shadow-container.active {
+                width: 400px;
+                height: 400px
+            }
+
+            #hubspot-messages-iframe-container iframe {
+                display: initial !important;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                right: 0 !important;
+                background: transparent !important
+            }
+        </style>
+
+        <div id="page-surface" class="" style="">
+
+            <div class="site-container" style="">
+
+
+
+
+
+                <header class="site-header-new sticky-top" style="">
+                    <nav class="navbar navbar-light navbar-expand-lg" style="">
+                        <div class="container" style="">
+                            <a class="navbar-brand" href="https://uptime.com" style=""><img class="img-fluid"
+                                    src="https://uptime.com/static/img/global/logo-uptime-dark.037a8ed1148d.svg"
+                                    width="203" height="28" style="margin: -6px 6px 0px;" alt="Uptime.com Logo"></a>
+                            <div class="d-lg-none text-nowrap" style="">
+
+                            </div>
+                            <div class="d-none d-lg-block" style="margin-left: -22px;">
+                                <ul class="navbar-nav mx-auto" style="">
+                                    <li class="nav-item dropdown" style=""><a class="nav-link"
+                                            href="https://uptime.com/go/products" style="">Products</a></li>
+                                    <li class="nav-item dropdown" style=""><a class="nav-link"
+                                            href="https://uptime.com/go/pricing" style="">Pricing</a></li>
+                                    <li class="nav-item dropdown" style=""><a class="nav-link"
+                                            href="https://uptime.com/go/resources" style="">Resources</a></li>
+                                    <li class="nav-item dropdown" style=""><a class="nav-link"
+                                            href="https://uptime.com/go/enterprise" style="">Enterprise</a></li>
+                                </ul>
+                            </div>
+                            <div class="d-none d-lg-block" style="">
+                                <a class="btn btn-outline-primary" style="margin-right: 0.75rem;"
+                                    href="https://uptime.com/login">Sign In</a>
+                                <a class="btn btn-primary" href="https://uptime.com/accounts/register" style="">Try For
+                                    Free</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="collapse navbar-collapse d-lg-none" id="header-navbar" style="">
+                        <div class="container pb-4" style="">
+                            <ul class="navbar-nav mx-auto mb-4" style="">
+                                <li class="nav-item dropdown" style=""><a class="nav-link"
+                                        href="https://uptime.com/go/products" style="">Products</a></li>
+                                <li class="nav-item dropdown" style=""><a class="nav-link"
+                                        href="https://uptime.com/go/pricing" style="">Pricing</a></li>
+                                <li class="nav-item dropdown" style=""><a class="nav-link"
+                                        href="https://uptime.com/go/resources" style="">Resources</a></li>
+                                <li class="nav-item dropdown" style=""><a class="nav-link"
+                                        href="https://uptime.com/go/enterprise" style="">Enterprise</a></li>
+                            </ul>
+                            <a class="btn btn-outline-primary" style="margin-right: 0.75rem;"
+                                href="https://uptime.com/login">Sign In</a>
+                            <a class="btn btn-primary" href="https://uptime.com/accounts/register" style="">Try For
+                                Free</a>
+                        </div>
+                    </div>
+                </header>
+
+
+
+
+
+                <div class="container" style="">
+                    <div id="alert-messages" style="">
+
+                    </div>
+                    <div id="alert-messages-dynamic" style=""></div>
+
+                </div>
+
+
+
+                <div id="public-profiles-details-page" style="">
+                    <div class="container" style="">
+                        <div class="row pt-5 pb-4" style="">
+                            <div class="col-lg-9 mb-4" style="">
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <div class="d-md-flex align-items-top justify-content-between" style="">
+                                        <div class="mr-4" style="">
+                                            <h1 class="font-28 text-primary font-weight-medium mt-1 mb-0" style="">
+                                                Luma Website Monitoring Status</h1>
+                                        </div>
+                                        <div style="">
+
+
+
+
+
+                                            <span class="caret" style=""></span>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <div class="row" style="">
+                                        <div class="col-sm-4 col-md-3" style="">
+                                            <div class="pb-2 d-flex justify-content-center align-items-center" style="">
+                                                <img class="img-fluid" style="max-height: 200px;"
+                                                    src="/media/website_profiles/" width="57" height="57"
+                                                    alt="View Luma - The Discord Bot outages and uptime"
+                                                    title="Luma - The Discord Bot">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 col-md-9" style="">
+                                            <p style="">Manage your Discord server with leveling, moderation, Twitch,
+                                                Youtube and Reddit notifications.</p>
+                                            <p style="">
+
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <h4 class="font-weight-medium" style="">Uptime <small class="text-muted"
+                                            style="">last 24 hours</small></h4>
+                                    <div style="margin: 0px -13px 0px -17px;">
+                                        <div class="position-relative" style="">
+                                            <div class="chartjs-size-monitor"
+                                                style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                <div class="chartjs-size-monitor-expand"
+                                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                    <div
+                                                        style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                                    </div>
+                                                </div>
+                                                <div class="chartjs-size-monitor-shrink"
+                                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <canvas id="uptime-chart" height="75" width="850"
+                                                style="width: 850px; height: 75px; display: block;"
+                                                class="chartjs-render-monitor"></canvas>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="graph-legend mt-2" style="">
+                                        <span class="marker up" style="">Uptime</span>
+                                        <span class="marker down" style="">Downtime</span>
+                                    </div>
+                                </div>
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-baseline mb-3"
+                                        style="">
+                                        <h4 class="font-weight-medium mb-0" style="">Response Time <small
+                                                class="text-muted" style="">last 24 hours</small></h4>
+                                        <p class="font-12 font-weight-light text-light-4 mb-0" style="">
+                                            High 2.35s,
+                                            Low 200ms,
+                                            Avg 265ms
+                                        </p>
+                                    </div>
+                                    <div class="position-relative" style="">
+                                        <div class="chartjs-size-monitor"
+                                            style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                            <div class="chartjs-size-monitor-expand"
+                                                style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                <div
+                                                    style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                                                </div>
+                                            </div>
+                                            <div class="chartjs-size-monitor-shrink"
+                                                style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <canvas id="response-time-chart" height="225" width="820"
+                                            style="width: 820px; height: 225px; display: block;"
+                                            class="chartjs-render-monitor"></canvas>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 mb-4" style="">
+                                <div class="white-block white-block-divider white-block-border p-4" style="">
+                                    <p class="h6 text-uppercase font-weight-bold text-dark-4 mb-4" style="">Rate Their
+                                        Service</p>
+                                    <p class="mb-3" style="">
+                                    </p>
+                                    <div class="br-wrapper br-theme-fontawesome-stars-o" style="">
+                                        <div class="br-widget" style=""><a href="#" class="br-selected" style=""></a><a
+                                                href="#" class="br-selected br-current" style=""></a><a href="#"
+                                                class="br-fractional br-fractional-80" style=""></a><a href="#" style=""
+                                                class=""></a><a href="#" style="" class=""></a>
+                                            <div class="br-current-rating" style="">2</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <p class="h6 text-uppercase font-weight-bold text-dark-4 mb-2" style="">Current
+                                        Status</p>
+                                    <p class="font-20 font-weight-normal text-status-up mb-3" style="">Up</p>
+
+                                    <p class="font-13 font-weight-light mb-1" style="">For 3 weeks, 2 days</p>
+                                    <p class="font-13 font-weight-light text-muted mb-0" style="">(Jun 21, 2022 9:20
+                                        a.m. CEST)</p>
+
+                                </div>
+
+
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <p class="h6 text-uppercase font-weight-bold text-dark-4 mb-2" style="">Uptime</p>
+                                    <p class="font-20 font-weight-normal text-success mb-0" style="">100%</p>
+
+                                </div>
+
+                                <div class="white-block white-block-border white-block-divider p-4" style="">
+                                    <p class="h6 text-uppercase font-weight-bold text-dark-4 mb-2" style="">Downtime</p>
+                                    <p class="font-20 font-weight-normal text-light-4 mb-0" style="">
+
+                                        None recorded
+
+                                    </p>
+
+                                </div>
+
+                                <div class="white-block white-block-divider white-block-border p-4" style="">
+                                    <p class="h6 text-uppercase font-weight-bold text-dark-4 mb-2" style="">Latest
+                                        Downtime</p>
+                                    <p class="font-20 font-weight-normal text-light-4 mb-0" style="">
+
+                                        Jun 21, 2022<br style="">
+                                        8:31 a.m. CEST
+
+                                    </p>
+
+                                    <p class="font-13 font-weight-light text-muted mt-2 mb-0" style="">Lasted for
+                                        48 minutes</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

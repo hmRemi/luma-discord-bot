@@ -1,10 +1,10 @@
-const Guild = require(`../../database/models/guildSchema`)
+//const Guild = require(`../../database/models/guildSchema`)
 
 module.exports = {
     name: 'ready',
     once: true,
     execute(client) {
-        const users = client.guilds.cache.reduce((size, g) => size + g.memberCount + 500, 0);
+        const users = client.guilds.cache.reduce((size, g) => size + g.memberCount, 0);
         const guilds = client.guilds.cache.size;
         const statusArray = [{
                 type: 'WATCHING',

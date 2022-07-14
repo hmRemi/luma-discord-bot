@@ -1,63 +1,41 @@
-const {
-	SlashCommandBuilder
-} = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-const {
-	MessageEmbed
-} = require("discord.js");
-
-const fs = require("fs");
-
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('help')
-		.setDescription('Display all commands'),
-	async execute(interaction) {
-		const roleColor =
-			interaction.guild.me.displayHexColor === "#000000" ?
-			"#ffffff" :
-			interaction.guild.me.displayHexColor;
+    data: new SlashCommandBuilder()
+        .setName('help')
+        .setDescription('Display all commands'),
+    async execute(interaction) {
+        const Embed = new MessageEmbed()
+		.setAuthor("Luma", "https://media.discordapp.net/attachments/895632161057669180/964145767340204042/purchase_premium.png")
+		.setDescription(`Hey! Thank you for adding me into your awesome server, my name is [**Luma**](https://discord.com/oauth2/authorize?client_id=991389222323892374&permissions=8&scope=bot%20applications.commands)! I am a modern, multi purpose solution for Discord.
 
-		let categories = [];
+		If you ever encounter any problems/bugs while using me, please be sure to report them at our [**support server**](https://discord.gg/3eXAf3mUT3).
+		
+		If you ever wish to purchase our premium subscription to have access to exclusive channels & commands, once again please join our [**support server**](https://discord.gg/3eXAf3mUT3) and discuss in a ticket!
+		**─────────────────────────────────────**
+		[**SUPPORT DISCORD | CLICK HERE**](https://discord.gg/3eXAf3mUT3)
+		[**INVITE BOT | CLICK HERE**](https://discord.com/oauth2/authorize?client_id=991389222323892374&permissions=8&scope=bot%20applications.commands)
+		**─────────────────────────────────────**
+		`)
 
-		fs.readdirSync(`../../src/commands/`).forEach((dir) => {
-			const commands = fs.readdirSync(`../../commands/${dir}/`).filter((file) => file.endsWith(".js"));
+		.addField(`**Ticket System**`, `\`\`\`setchannel, settranscripts, setbuttons, setcategory, setdefaultrole, setstaffrole, setdescription, panel\`\`\``)
+		.addField(`**Music System**`, `\`\`\`play, volume, filter, repeat, skip, queue, pause, resume, previous, nowplaying, stop, search\`\`\``)
+		.addField(`**Moderation System**`, `\`\`\`ban, kick, purge, slowmode, lock, unlock, timeout\`\`\``)
+		.addField(`**Giveaway System**`, `\`\`\`start, end, pause, unpause, reroll, delete\`\`\``)
+		.addField(`**Verification System**`, `\`\`\`panel, setrole, settings\`\`\``)
+		.addField(`**Information**`, `\`\`\`info, status, ping, help\`\`\``)
+		.addField(`**Event System**`, `\`\`\`gtn\`\`\``)
 
-			const cmds = commands.map((command) => {
-				let file = require(`../../commands/${dir}/${command}`);
 
-				if (!file.name) return "No command name.";
+		.setColor(`#2f3136`)
+		.setImage('https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG');
 
-				let name = file.name.replace(".js", "");
-
-				return `\`${name}\``;
-			});
-
-			let data = new Object();
-
-			data = {
-				name: dir.toUpperCase(),
-				value: cmds.length === 0 ? "In progress." : cmds.join(" "),
-			};
-
-			categories.push(data);
-		});
-
-		const embed = new MessageEmbed()
-			.setTitle("📬 Need help? Here are all of my commands:")
-			.addFields(categories)
-			.setDescription(
-				`Use \`${prefix}help\` followed by a command name to get more additional information on a command. For example: \`${prefix}help ban\`.`
-			)
-			.setFooter(
-				`Requested by ${interaction.author.tag}`,
-				interaction.author.displayAvatarURL({
-					dynamic: true
-				})
-			)
-			.setTimestamp()
-			.setColor(roleColor);
-		return interaction.channel.send(embed);
-	}
+		await interaction.reply(
+			{ 
+				embeds: [Embed] 
+			}
+		);
+    }
 }

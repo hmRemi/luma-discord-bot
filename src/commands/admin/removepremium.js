@@ -15,7 +15,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('remove-premium')
         .setDescription('Remove a servers premium.'),
-
+    owner: true,
     async execute(interaction) {
         const Embed = new MessageEmbed()
         .setAuthor("Premium Manager", "https://images-ext-1.discordapp.net/external/Py0I5pd-YigEQzWQXed_kxr8f0RHC6cTLBjY4ZaY1Hg/https/images-ext-2.discordapp.net/external/w4einSDWsGY1AHNyFOxJSs9pMnwTjPu8jWamK4BEWKg/%253Fsize%253D96%2526quality%253Dlossless/https/cdn.discordapp.com/emojis/995426830746140754.webp")

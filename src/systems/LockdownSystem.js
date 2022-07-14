@@ -3,6 +3,8 @@ const DB = require("../database/models/lockdownSchema")
 module.exports = async (client) => {
     DB.find().then(async (documentsArray) => {
         documentsArray.forEach((d) => {
+            if(!client.guilds.cache.get(d.GuildID)) return;
+            
             const Channel = client.guilds.cache.get(d.GuildID).channels.cache.get(d.ChannelID);
 
             if(!Channel) return;
