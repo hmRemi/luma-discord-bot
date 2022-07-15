@@ -61,15 +61,20 @@ module.exports = {
             // If guild doesn't have a premium profile return saying no subscription.
             if(blacklistProfile) return interaction.reply({
                 embeds: [Embed.setDescription(`Your server has recently violated our terms of service, therefore we have decided to blacklist usage from your server indefinetely. Please note that this punishment is unappealable unless it is agreed on by both of the developers.\n
-                Effective immediately, you have lost permission to preform any command in any server under Luma. If you feel that this punishment was a case of abuse or unjustified, please contact @! [D] Lia.\n
+                Effective immediately, you have lost permission to preform any command in any server under Luma. If you feel that this punishment was a case of abuse or unjustified, please contact <@981264429482119189>.\n
                 Please acknowledge that this message is automated and that you will recieve no reply if you respond to this message.`)]
             });
 
             // Check if interaction user is a bot owner.
-            if(command.owner && interaction.user.id !== "351763589746393091")
-            return interaction.reply({
-                embeds: [Embed.setDescription("This is a bot owner commmand only.")]
-            });
+            //if(command.owner && (interaction.user.id !== "351763589746393091" || interaction.user.id !== "981264429482119189"))
+
+            if(command.owner) {
+                if(!interaction.member.user.id == "351763589746393091" || !interaction.member.user.id == "981264429482119189") {
+                    return interaction.reply({
+                        embeds: [Embed.setDescription("This is a bot owner commmand only.")]
+                    });
+                }
+            }
 
             try {
                 if (command.permissions && command.permissions.length > 0 || command.botpermissions && command.botpermissions.length > 0) {
@@ -94,7 +99,7 @@ module.exports = {
                 await command.execute(interaction);
             } catch (error) {
                 console.error(error);
-                await interaction.reply({
+                await interaction.channel.send({
                     content: 'There was an error while executing this command!',
                     ephemeral: true
                 });
@@ -188,6 +193,16 @@ module.exports = {
                         ephemeral: true,
                     });
                 }
+            }
+        } else if (interaction.isSelectMenu()) {
+            const menu = client.menus.get(interaction.customId);
+            if (!menu) return await interaction.reply({content: "This menu doesn't exist!"});
+
+            try {
+                await menu.execute(interaction);
+            } catch (err) {
+                console.error(err);
+                await interaction.reply({content: "There was an error while executing this menu!"});
             }
         }
 

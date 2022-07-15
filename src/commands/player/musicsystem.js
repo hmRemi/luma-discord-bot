@@ -127,7 +127,8 @@ module.exports = {
                 .setName('options')
                 .setDescription('Select an option.')
                 .setRequired(true)
-                .addChoices({
+                .addChoices(
+                    {
                         name: "queue",
                         value: "queue"
                     }, 

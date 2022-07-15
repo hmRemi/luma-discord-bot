@@ -43,7 +43,6 @@ client.distube
             ]
         }),
 
-        //`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}\n${status(queue)}`
     )
 
     .on('addSong', (queue, song) =>
@@ -51,7 +50,6 @@ client.distube
             embeds: [messageEmbed
                 .setDescription(`Added [${song.name}](${song.url}) to the queue.\n${status(queue)}`)
                 .setThumbnail(song.thumbnail)]
-                //setDescription(`Added [${song.name}](${song.url}) - \`${song.formattedDuration}\` to the queue by **${song.user}**\n`).setThumbnail(song.thumbnail)]
         }))
 
     .on('addList', (queue, playlist) =>

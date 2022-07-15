@@ -31,6 +31,7 @@ discordModals(client); // discord-modals needs your client in order to interact 
 // Collections
 client.commands = new Collection();
 client.buttons = new Collection();
+client.menus = new Collection();
 
 app.enable("trust proxy");
 app.set("etag", false);
@@ -52,6 +53,8 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandsFolder, "./src/commands")
     client.handleButtons(buttonsFolder, "./src/buttons")
+    client.handleMenus();
+
     require("./systems/LockdownSystem")(client);
     require("./systems/GiveawaySystem")(client);
 
@@ -84,5 +87,5 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
 })();
 
 /*
- * REMEMBER TO UPDATE FILES AFTER EACH CHANGE IN VPS
+ * REMEMBER TO UPDATE FILES AFTER EACH CHANGE IN VPS suck ur mum
 */
