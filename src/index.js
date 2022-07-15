@@ -82,3 +82,7 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
 
     app.listen(80, () => console.log('App on port 80'));
 })();
+
+/*
+ * REMEMBER TO UPDATE FILES AFTER EACH CHANGE IN VPS
+*/

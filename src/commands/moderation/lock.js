@@ -21,6 +21,7 @@ module.exports = {
         .addStringOption(option => option.setName("reason").setDescription("Provide a reason for this lockdown.")),
 
     permissions: [Permissions.FLAGS.MANAGE_CHANNELS],
+    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
     async execute(interaction) {
         const { guild, channel, options } = interaction;
 

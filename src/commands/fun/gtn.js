@@ -25,6 +25,7 @@ module.exports = {
             .setRequired(false)
         ),
     permissions: [Permissions.FLAGS.ADMINISTRATOR],
+    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.MANAGE_ROLES, Permissions.FLAGS.MANAGE_MESSAGES],
     async execute(interaction) {
         try {
             const ranNum = Math.round(Math.random() * 1000);

@@ -15,7 +15,7 @@ module.exports = {
         .setDescription('Mass delete messages in a channel.')
         .addIntegerOption(option => option.setName('amount').setDescription('Enter an amount of messages that is going to be deleted.').setRequired(true)),
     permissions: [Permissions.FLAGS.MANAGE_MESSAGES],
-
+    botpermissions: [Permissions.FLAGS.MANAGE_MESSAGES],
     async execute(interaction) {
         const amount = interaction.options.getInteger('amount');
 

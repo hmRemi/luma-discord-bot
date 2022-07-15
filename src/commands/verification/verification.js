@@ -36,6 +36,7 @@ module.exports = {
             .setName("settings")
             .setDescription("List all verification settings")),
     permissions: [Permissions.FLAGS.ADMINISTRATOR],
+    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
     async execute(interaction) {
         if (interaction.options.getSubcommand() === "panel") {
             const Embed = new MessageEmbed()

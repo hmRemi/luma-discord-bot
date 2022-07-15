@@ -15,7 +15,6 @@ module.exports = {
         .setName('getservers')
         .setDescription('Get all servers using bot'),
     owner: true,
-    permissions: [Permissions.FLAGS.ADMINISTRATOR],
     async execute(interaction) {
 
         client.guilds.cache.forEach(guild => {

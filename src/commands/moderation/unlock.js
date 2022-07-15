@@ -17,6 +17,7 @@ module.exports = {
         .setName('unlock')
         .setDescription('Unlock this channel.'),
     permissions: [Permissions.FLAGS.MANAGE_CHANNELS],
+    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
     async execute(interaction) {
         const { guild, channel, options } = interaction;
 

@@ -147,6 +147,7 @@ module.exports = {
             ),
     
     permissions: [Permissions.FLAGS.ADMINISTRATOR],
+    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
     async execute(interaction) {
         const {
             guild,

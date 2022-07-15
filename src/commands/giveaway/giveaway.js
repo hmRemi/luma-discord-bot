@@ -80,6 +80,7 @@ module.exports = {
             )
         ),
     permissions: [Permissions.FLAGS.ADMINISTRATOR],
+    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
     async execute(interaction) {
 
         const {
@@ -104,25 +105,33 @@ module.exports = {
                 const winnerCount = options.getInteger("winners");
                 const prize = options.getString("prize");
 
-                client.giveawaysManager.start(gchannel, {
-                    duration: ms(duration),
-                    winnerCount,
-                    prize,
-                    messages: {
-                        giveaway: '‎',
-                        giveawayEnded: '‎',
-                        drawing: 'Drawing: {timestamp}',
-                        dropMessage: 'React below to participate in this giveaway!',
-                        inviteToParticipate: 'React below to participate in this giveaway!',
-                        winMessage: '‎',
-                        embedFooter: '{this.winnerCount} winner(s)',
-                        noWinner: 'Giveaway cancelled, no valid participations.',
-                        hostedBy: 'Hosted by: {this.hostedBy}',
-                        winners: 'Winner(s):',
-                        endedAt: 'Ended at'
-                    },
-                    image: "https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG"
-                }).then(async () => {
+                try {
+                    client.giveawaysManager.start(gchannel, {
+                        duration: ms(duration),
+                        winnerCount,
+                        prize,
+                        messages: {
+                            giveaway: '‎',
+                            giveawayEnded: '‎',
+                            drawing: 'Drawing: {timestamp}',
+                            dropMessage: 'React below to participate in this giveaway!',
+                            inviteToParticipate: 'React below to participate in this giveaway!',
+                            winMessage: '‎',
+                            embedFooter: '{this.winnerCount} winner(s)',
+                            noWinner: 'Giveaway cancelled, no valid participations.',
+                            hostedBy: 'Hosted by: {this.hostedBy}',
+                            winners: 'Winner(s):',
+                            endedAt: 'Ended at'
+                        },
+                        image: "https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG"
+                    }).catch(err => {
+                        return interaction.reply(`Missing permissions: ${err}`)
+                    });
+                } catch (err) {
+                }
+    
+                
+                /*.then(async () => {
                     Embed.setDescription("Giveaway started successfully.")
                     interaction.reply({
                         embeds: [Embed]
@@ -132,7 +141,8 @@ module.exports = {
                     interaction.reply({
                         embeds: [Embed]
                     });
-                });
+                });*/
+            
             }
             break;
 

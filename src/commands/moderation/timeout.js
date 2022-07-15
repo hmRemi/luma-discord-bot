@@ -16,6 +16,7 @@ module.exports = {
         .addStringOption(option => option.setName('reason').setRequired(true).setDescription(`Add a reasoning for your timeout.`))
         .addBooleanOption(option => option.setName('silent').setDescription('Input true if message should be silent').setRequired(true)),
     permissions: [Permissions.FLAGS.MODERATE_MEMBERS],
+    botpermissions: [Permissions.FLAGS.MODERATE_MEMBERS],
     async execute(interaction) {
         const silent = interaction.options.getBoolean('silent');
         const user = interaction.options.getUser('target');

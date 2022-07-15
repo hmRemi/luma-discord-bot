@@ -18,6 +18,7 @@ module.exports = {
         .addBooleanOption(option => option.setName('silent').setDescription('Input true if message should be silent').setRequired(true)),
 
     permissions: [Permissions.FLAGS.KICK_MEMBERS],
+    botpermissions: [Permissions.FLAGS.KICK_MEMBERS],
     async execute(interaction) {
         const silent = interaction.options.getBoolean('silent');
 

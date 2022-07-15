@@ -72,7 +72,9 @@ module.exports = {
             });
 
             try {
-                if (command.permissions && command.permissions.length > 0) {
+                if (command.permissions && command.permissions.length > 0 || command.botpermissions && command.botpermissions.length > 0) {
+
+
                     const Embed = new MessageEmbed()
                         .setAuthor("Insufficient Permissions", "https://media.discordapp.net/attachments/981264899034476644/995440858923008020/image_10.png")
                         .setImage("https://media.discordapp.net/attachments/895632161057669180/938422114418061353/void_purple_bar.PNG")
@@ -83,12 +85,11 @@ module.exports = {
                         ephemeral: true
                     });
 
-                    if (!interaction.guild.me.permissions.has(command.permissions)) return await interaction.reply({
-                        embeds: [Embed.setDescription("I'm lacking permissions to perform this command.")],
+                    if (!interaction.guild.me.permissions.has(command.botpermissions)) return await interaction.reply({
+                        embeds: [Embed.setDescription("I'm lacking permissions to preform this command.")],
                         ephemeral: true
                     });
                 }
-
 
                 await command.execute(interaction);
             } catch (error) {
