@@ -80,7 +80,7 @@ module.exports = {
             )
         ),
     permissions: [Permissions.FLAGS.ADMINISTRATOR],
-    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
+    botpermissions: [Permissions.FLAGS.SEND_MESSAGES],
     async execute(interaction) {
 
         const {

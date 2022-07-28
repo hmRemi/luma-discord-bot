@@ -22,6 +22,7 @@ module.exports = {
             if (message.author.bot) return;
 
             if(message.guild.id == null) return;
+            if(message.guild == null) return;
 
             // If no setup, don't do anything.
             const isRunning = await Guild.findOne({

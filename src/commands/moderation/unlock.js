@@ -16,8 +16,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('unlock')
         .setDescription('Unlock this channel.'),
-    permissions: [Permissions.FLAGS.MANAGE_CHANNELS],
-    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
+    permissions: [Permissions.FLAGS.MANAGE_ROLES],
+    botpermissions: [Permissions.FLAGS.MANAGE_ROLES],
     async execute(interaction) {
         const { guild, channel, options } = interaction;
 

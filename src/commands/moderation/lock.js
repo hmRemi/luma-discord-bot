@@ -20,8 +20,8 @@ module.exports = {
         .addStringOption(option => option.setName("time").setDescription("Expire date for this lockdown (1m, 1h, 1d)").setRequired(true))
         .addStringOption(option => option.setName("reason").setDescription("Provide a reason for this lockdown.")),
 
-    permissions: [Permissions.FLAGS.MANAGE_CHANNELS],
-    botpermissions: [Permissions.FLAGS.MANAGE_CHANNELS],
+       permissions: [Permissions.FLAGS.MANAGE_ROLES],
+    botpermissions: [Permissions.FLAGS.MANAGE_ROLES],
     async execute(interaction) {
         const { guild, channel, options } = interaction;
 

@@ -8,6 +8,11 @@ const { SpotifyPlugin } = require("@distube/spotify");
 const moment = require("moment");
 require("moment-duration-format");
 
+const Topgg = require(`@top-gg/sdk`)
+const { AutoPoster } = require('topgg-autoposter')
+
+const api = new Topgg.Api(process.env.topggtoken)
+
 const express = require("express");
 const app = express();
 
@@ -62,12 +67,13 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
     //const server = https.createServer({ key, cert }, app);
 
     app.use((req, res, next) => {
-        console.log(`- ${req.method}: ${req.url} ${res.statusCode} ( by: ${req.ip})`)
+        console.log(`- REQUEST: ${req.method} | URL: ${req.url} | CODE: ${res.statusCode} | IP: ${req.ip}`)
         next();
     });
+    
 
     app.get("/", async(req, res) => {
-        const users = client.users.cache.size;
+        const users = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
         const guilds = client.guilds.cache.size;
 
         const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
@@ -79,6 +85,13 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
 
         res.send(file);
     })
+    
+    AutoPoster(process.env.topggtoken, client)
+      .on('posted', () => {
+        console.log('Posted stats to Top.gg!')
+      });
+    
+
 
     client.login(process.env.token);
     client.dbLogin();
@@ -87,5 +100,5 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
 })();
 
 /*
- * REMEMBER TO UPDATE FILES AFTER EACH CHANGE IN VPS suck ur mum
+ * REMEMBER TO UPDATE FILES IN VPS AFTER CHANGE
 */

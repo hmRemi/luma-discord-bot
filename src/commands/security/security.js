@@ -11,7 +11,7 @@ const {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('security')
-        .setDescription('Shows guild security settings')
+        .setDescription('Shows guild security settings (UNDER DEVELOPMENT)')
         .addSubcommand(subcommand =>
             subcommand
             .setName("settings")
@@ -115,7 +115,7 @@ module.exports = {
 
         const mainEmbed = new MessageEmbed()
             .setTitle(`Security Settings for ${guild.name}`)
-            .setDescription("Here are the current security settings for this guild.")
+            .setDescription("Here are the current security settings for this guild. (UNDER DEVELOPMENT)")
 
         const row = new MessageActionRow()
             .addComponents(

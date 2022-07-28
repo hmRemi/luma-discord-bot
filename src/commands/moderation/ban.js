@@ -19,6 +19,7 @@ module.exports = {
         .addBooleanOption(option => option.setName('hidereason').setDescription('Input true if reason should be hidden').setRequired(true))
         .addBooleanOption(option => option.setName('silent').setDescription('Input true if message should be silent').setRequired(true)),
     permissions: [Permissions.FLAGS.BAN_MEMBERS],
+    botpermissions: [Permissions.FLAGS.BAN_MEMBERS],
     async execute(interaction) {
 
         const silent = interaction.options.getBoolean('silent');
@@ -35,7 +36,7 @@ module.exports = {
 
         let reason = interaction.options.getString('reason');
 
-        if (!banMember.banable) return interaction.reply("**Cannot Ban This User!**")
+        if (!banMember.bannable) return interaction.reply("**Cannot Ban This User!**")
 
         const embedBanned = new MessageEmbed()
         .setAuthor({

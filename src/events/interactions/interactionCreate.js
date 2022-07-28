@@ -66,10 +66,10 @@ module.exports = {
             });
 
             // Check if interaction user is a bot owner.
-            //if(command.owner && (interaction.user.id !== "351763589746393091" || interaction.user.id !== "981264429482119189"))
+            //if(command.owner && !interaction.user.id !== "351763589746393091") return interaction.reply({embeds: [Embed.setDescription("Owner command only")};
 
             if(command.owner) {
-                if(!interaction.member.user.id == "351763589746393091" || !interaction.member.user.id == "981264429482119189") {
+                if(interaction.member.id != "351763589746393091") {
                     return interaction.reply({
                         embeds: [Embed.setDescription("This is a bot owner commmand only.")]
                     });
