@@ -25,9 +25,10 @@ module.exports = {
 		.addField(`**Moderation System**`, `\`\`\`ban, kick, purge, slowmode, lock, unlock, timeout\`\`\``)
 		.addField(`**Giveaway System**`, `\`\`\`start, end, pause, unpause, reroll, delete\`\`\``)
     	.addField(`**Hypixel System**`, `\`\`\`hypixel (profile, skywars, bedwars) (user)\`\`\``)
+		.addField(`**Porn System**`, `\`\`\`nsfw (ass, boobs, pussy, 4k, anal, cum)\`\`\``)
 		.addField(`**Verification System**`, `\`\`\`panel, setrole, settings\`\`\``)
 		.addField(`**Information**`, `\`\`\`info, status, ping, help\`\`\``)
-    	.addField(`**Economy System**`, `\`\`\`balance\`\`\``)
+    	.addField(`**Economy System**`, `\`\`\`balance, leaderboard\`\`\``)
 		.addField(`**Event System**`, `\`\`\`gtn\`\`\``)
 
 

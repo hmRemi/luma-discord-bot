@@ -47,6 +47,12 @@ module.exports = {
                 GuildName: interaction.guild.name,
             });
 
+            // If channel is not nsfw, return.
+            if(command.nsfw && !interaction.channel.nsfw)
+            return interaction.reply({
+                embeds: [Embed.setDescription("You can only use this command in an NSFW channel!")]
+            });
+
             // If guild doesn't have a premium profile return saying no subscription.
             if(command.premium && !premiumProfile)
             return interaction.reply({
