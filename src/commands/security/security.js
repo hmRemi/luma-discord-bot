@@ -137,6 +137,26 @@ module.exports = {
                         value: "antilink",
                         description: "Configure Anti Link"
                     },
+                    {
+                        label: "Anti Channels Create",
+                        value: "antilink",
+                        description: "Configure Anti Link"
+                    },
+                    {
+                        label: "Anti Channels Delete",
+                        value: "antilink",
+                        description: "Configure Anti Link"
+                    },
+                    {
+                        label: "Anti Roles Create",
+                        value: "antilink",
+                        description: "Configure Anti Link"
+                    },
+                    {
+                        label: "Anti Roles Delete",
+                        value: "antilink",
+                        description: "Configure Anti Link"
+                    },
                 ]),
 
             )
