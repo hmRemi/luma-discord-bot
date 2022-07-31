@@ -9,7 +9,7 @@ const fs = require('node:fs');
 const clientId = '991389222323892374';
 const guildId = '994981064223232000';
 
-const local = true; /* Change to false to deploy commands globally. */
+const local = false; /* Change to false to deploy commands globally. */
 
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
