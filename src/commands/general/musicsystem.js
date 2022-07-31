@@ -127,24 +127,19 @@ module.exports = {
                 .setName('options')
                 .setDescription('Select an option.')
                 .setRequired(true)
-                .addChoices(
-                    {
+                .addChoices({
                         name: "queue",
                         value: "queue"
-                    }, 
-                    {
+                    }, {
                         name: "pause",
                         value: "pause"
-                    }, 
-                    {
+                    }, {
                         name: "resume",
                         value: "resume"
-                    }, 
-                    {
+                    }, {
                         name: "previous",
                         value: "previous"
-                    },
-                    {
+                    }, {
                         name: "nowplaying",
                         value: "nowplaying"
                     },
@@ -211,13 +206,13 @@ module.exports = {
 
                     for (let i = 0; i < 10; i++) {
                         try {
-                          searchresult += await `**${i + 1}**. [${result[i].name}](${
+                            searchresult += await `**${i + 1}**. [${result[i].name}](${
                             result[i].url
                           }) - \`${result[i].formattedDuration}\`\n`;
                         } catch {
-                          searchresult += await " ";
+                            searchresult += await " ";
                         }
-                      }
+                    }
 
                     let userinput = 10;
                     return interaction.reply({
@@ -333,17 +328,22 @@ module.exports = {
                             });
                         case "nowplaying":
                             const song = queue.songs[0]
-                            return interaction.reply({ embeds: [messageEmbed
-                                .setDescription(`[${song.name}](${song.url})`)
-                                .addField("**Views:**", song.views.toString(), true)
-                                .addField("**Like:**", song.likes.toString(), true)
-                                .addField("**Duration:**", `${queue.formattedCurrentTime} / ${song.formattedDuration}`)
-                                .addField("**Link**", `[Download This Song](${song.streamURL})`)
-                                .addField("**Status**", status(queue).toString())
-                                .setThumbnail(song.thumbnail)
-                                .setFooter({ text: `Requested by ${interaction.user.username}`, iconURL: interaction.user.avatarURL() })] 
-                        })
-                        
+                            return interaction.reply({
+                                embeds: [messageEmbed
+                                    .setDescription(`[${song.name}](${song.url})`)
+                                    .addField("**Views:**", song.views.toString(), true)
+                                    .addField("**Like:**", song.likes.toString(), true)
+                                    .addField("**Duration:**", `${queue.formattedCurrentTime} / ${song.formattedDuration}`)
+                                    .addField("**Link**", `[Download This Song](${song.streamURL})`)
+                                    .addField("**Status**", status(queue).toString())
+                                    .setThumbnail(song.thumbnail)
+                                    .setFooter({
+                                        text: `Requested by ${interaction.user.username}`,
+                                        iconURL: interaction.user.avatarURL()
+                                    })
+                                ]
+                            })
+
                         case "pause":
                             await queue.pause(VoiceChannel);
                             return interaction.reply({
@@ -370,22 +370,5 @@ module.exports = {
                 embeds: [errorEmbed]
             });
         }
-    }
-}
-
-function embedbuilder(client, message, color, title, description, thumbnail) {
-    try {
-        let embed = new Discord.MessageEmbed()
-            .setColor(color)
-            .setAuthor(message.author.tag, message.member.user.displayAvatarURL({
-                dynamic: true
-            }), "t")
-            .setFooter(client.user.username, client.user.displayAvatarURL());
-        if (title) embed.setTitle(title);
-        if (description) embed.setDescription(description);
-        if (thumbnail) embed.setThumbnail(thumbnail)
-        return message.channel.send(embed);
-    } catch (error) {
-        console.error
     }
 }

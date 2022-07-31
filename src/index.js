@@ -90,8 +90,6 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
       .on('posted', () => {
         console.log('Posted stats to Top.gg!')
       });
-    
-
 
     client.login(process.env.token);
     client.dbLogin();

@@ -24,6 +24,9 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
         if (interaction.isCommand()) {
+
+            if(interaction.guild.id == null) return;
+
             // Search for a guild profile containing a guild id.
             let guildProfile = await Guild.findOne({
                 guildID: interaction.guild.id
