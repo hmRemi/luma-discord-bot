@@ -23,6 +23,9 @@ const Verify = require(`../../database/models/verifySchema`);
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
+    
+        if(interaction.guild.id == null) return;
+    
         if (interaction.isCommand()) {
 
             if(interaction.guild.id == null) return;

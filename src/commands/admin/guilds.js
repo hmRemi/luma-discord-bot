@@ -18,8 +18,6 @@ module.exports = {
         .setDescription('Send list of guilds the bot is in'),
     owner: true,
     async execute(interaction) {
-        const emojis = ['🏆', '🥈', '🥉'];
-
         const serverlist = client.guilds.cache.sort((a, b) => b.id - a.id).sort((a, b) => b.memberCount - a.memberCount).map(guild => guild).map((guild, i) =>
             `\`${i+++1}.\` **${guild.name}** - \`${guild.id}\` | ${guild.memberCount} Members`
         );
