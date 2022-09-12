@@ -8,10 +8,7 @@ const { SpotifyPlugin } = require("@distube/spotify");
 const moment = require("moment");
 require("moment-duration-format");
 
-const Topgg = require(`@top-gg/sdk`)
 const { AutoPoster } = require('topgg-autoposter')
-
-const api = new Topgg.Api(process.env.topggtoken)
 
 const express = require("express");
 const app = express();
@@ -33,27 +30,52 @@ module.exports = client;
 const discordModals = require('discord-modals'); // Define the discord-modals package!
 discordModals(client); // discord-modals needs your client in order to interact with modals
 
-// Collections
+/**
+ * BOT COLLECTIONS
+ * Using @Collection to store datatypes and classes.
+ */
+
 client.commands = new Collection();
 client.buttons = new Collection();
 client.menus = new Collection();
+
+/**
+ * DASHBOARD CONFIGURATION
+ * Using express.
+ */
 
 app.enable("trust proxy");
 app.set("etag", false);
 app.use(express.static(__dirname + "/website"));
 
+
+
 require('dotenv').config();
 
 const handlers = fs.readdirSync("./src/handlers").filter(file => file.endsWith(".js"));
+const systemsFolder = fs.readdirSync("./src/systems").filter(file => file.endsWith(".js"));
 const eventFiles = fs.readdirSync("./src/events")/*.filter(file => file.endsWith(".js"))*/;
 const commandsFolder = fs.readdirSync("./src/commands");
 const buttonsFolder = fs.readdirSync("./src/buttons");
 
 (async () => {
 
+    /**
+     * Require every file inside of the handlers & systems directory
+     * Will revamp later on to a handler.
+     */
+
     for(file of handlers) {
         require(`./handlers/${file}`)(client);
     }
+
+    for(file of systemsFolder) {
+        require(`./systems/${file}`)(client);
+    }
+
+    /**
+     * Register all files.
+     */
 
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandsFolder, "./src/commands")
@@ -63,10 +85,8 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
     require("./systems/LockdownSystem")(client);
     require("./systems/GiveawaySystem")(client);
 
-    const https = require('https');
-    //const server = https.createServer({ key, cert }, app);
-
     app.use((req, res, next) => {
+        // Log every website entry to the console.
         console.log(`- REQUEST: ${req.method} | URL: ${req.url} | CODE: ${res.statusCode} | IP: ${req.ip}`)
         next();
     });
@@ -86,6 +106,10 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
         res.send(file);
     })
     
+    /**
+     * Using @AutoPoster to update TOP.GG stats.
+     */
+
     AutoPoster(process.env.topggtoken, client)
       .on('posted', () => {
         console.log('Posted stats to Top.gg!')
@@ -96,7 +120,3 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
 
     app.listen(80, () => console.log('App on port 80'));
 })();
-
-/*
- * REMEMBER TO UPDATE FILES IN VPS AFTER CHANGE
-*/

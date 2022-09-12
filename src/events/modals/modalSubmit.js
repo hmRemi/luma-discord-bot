@@ -18,7 +18,7 @@ module.exports = {
         
         //await modal.deferReply({ephemeral: true });
         
-        const reason = modal.getTextInputValue("ticketclose");
+        const reason = modal.getTextInputValue("ticketclose") || "Ticket closed";
 
         try {
             await DBSetup.findOneAndUpdate({
