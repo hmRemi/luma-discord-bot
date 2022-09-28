@@ -98,7 +98,7 @@ const buttonsFolder = fs.readdirSync("./src/buttons");
 
         const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
 
-        let file = fs.readFileSync("./src/website/html/home.html", { encoding: "utf8" });
+        let file = fs.readFileSync("./src/website/html/index.html", { encoding: "utf8" });
         file = file.replace("$$guilds$$", guilds);
         file = file.replace("$$users$$", users);
         file = file.replace("$$uptime$$", duration);
